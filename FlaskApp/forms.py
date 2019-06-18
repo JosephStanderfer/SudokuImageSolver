@@ -6,18 +6,37 @@ Created on Fri Jun  7 08:39:56 2019
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import IntegerField, FieldList, StringField, PasswordField, SubmitField
+from wtforms.validators import NumberRange, DataRequired, Optional, ValidationError
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+
+class imageUpload(FlaskForm):
+    upload = FileField('image', validators=[FileRequired(), \
+        FileAllowed(['jpg', 'png'], 'Images only!')])
+    submit = SubmitField('Submit Changes')
 
 class gridForm(FlaskForm):
-    one1 = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confPassword = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    cellVals = FieldList(IntegerField(validators=[NumberRange(min=1, max=9, message=None), Optional()]), min_entries=81, max_entries=81)
+    submit = SubmitField('Submit Changes')
+
+
+
+# class UploadForm(Form):
+#     image        = FileField(u'Image File', [validators.regexp(u'^[^/\\]\.jpg$')])
+#     description  = TextAreaField(u'Image Description')
+
+#     def validate_image(form, field):
+#         if field.data:
+#             field.data = re.sub(r'[^a-z0-9_.-]', '_', field.data)
+
+# def upload(request):
+#     form = UploadForm(request.POST)
+#     if form.image.data:
+#         image_data = request.FILES[form.image.name].read()
+#         open(os.path.join(UPLOAD_PATH, form.image.data), 'w').write(image_data)
+
+
+
 
 #     def validate_username(self, username):
 #         user = User.query.filter_by(username=username.data).first()
