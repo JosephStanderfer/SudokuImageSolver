@@ -11,13 +11,13 @@ from wtforms.validators import NumberRange, DataRequired, Optional, ValidationEr
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 class imageUpload(FlaskForm):
-    upload = FileField('image', validators=[FileRequired(), \
+    picture = FileField('Choose a sudoku image file', validators=[FileRequired(), \
         FileAllowed(['jpg', 'png'], 'Images only!')])
-    submit = SubmitField('Submit Changes')
+    submit = SubmitField('Submit Puzzle!')
 
 class gridForm(FlaskForm):
     cellVals = FieldList(IntegerField(validators=[NumberRange(min=1, max=9, message=None), Optional()]), min_entries=81, max_entries=81)
-    submit = SubmitField('Submit Changes')
+    submit = SubmitField('Solve!')
 
 
 
