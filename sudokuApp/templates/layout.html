@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='gridStyle1.css') }}">
+  <!-- over-riding picture from bootstrap -->
+  <style type="text/css">
+      .bg-image { 
+        background-image: url('static/siteImages/newspaper.jpg');
+      }
+      #loading {
+        background-image: url('static/siteImages/sudokuLoading.gif');
+      }
+  </style>
+</head>
+<body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+	<header class="site-header">
+		<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+		    <div class="container" style="width: 100%; padding-left:40px; margin-left:0;">
+		      <a class="navbar-brand" href="/">The Sudoku Image Solver</a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		      </button>
+		      <div class="collapse navbar-collapse" id="navbarToggle">
+		        <div class="navbar-nav mr-auto">
+		        </div>
+		        <!-- Navbar Right Side -->
+		        <div class="navbar-nav">
+			          <a class="nav-item nav-link" href="/about">About</a>
+		        </div>
+		      </div>
+		    </div>
+		</nav>
+	</header>
+
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      
+      <div id="content" class="d-none d-md-flex col-md-4 col-lg-5 bg-image">
+        <div id="loading" class="col-md-3 col-lg-20 bg-image">
+        </div>
+      </div>
+        <div class="col-md-8 col-lg-7">
+          <div class="login d-flex align-items-center py-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-9 col-lg-8 mx-auto">
+                   {% block content %}{% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+<!-- source code: https://startbootstrap.com/snippets/sign-in-split/ -->

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2 class="mb-4">How to Use:</h2>
+
+  <ol>
+    <li>Upload an image (PNG or JPG) containing the sudoku puzzle you would like to solve</li>
+    <li>Verify that the program identified the numbers correctly. Make corrections where necessary</li>
+    <li>Press "Solve" to recieve the solution!</li>
+  </ol>
+
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+      {{ form.picture(class="form-control-file") }}
+      {% if form.picture.errors %}
+          {% for error in form.picture.errors %}
+              <div class="error">{{ error }}</div>
+          {% endfor %}
+      {% endif %}
+    </div>
+
+      <!-- {{ form.submit(class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", onclick=" $('#loading').show();") }} -->
+      {{ form.submit(class="btn btn-primary btn-block submitBtn mb-2", onclick=" $('#loading').show();") }}
+      
+      <h6 style="color: black;"><i>** To use the default image (LEFT) press submit without selecting a file </i></h6>
+
+  </form>
+{% endblock content %}
+
+
+<!-- source code: https://startbootstrap.com/snippets/sign-in-split/ -->

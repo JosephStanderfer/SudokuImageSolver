@@ -1,0 +1,221 @@
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
+}
+
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  /*background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');*/
+  background-image: url('static/siteImages/newspaper.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.login-heading {
+  font-weight: 300;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  background-color: #808080;
+}
+
+.submitBtn { 
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  border-color: #808080;
+  background-color: #808080;
+}
+
+.submitBtn:hover { 
+  /*color: #808080;*/
+  border-color: #FFD000;
+  background-color: #FFD000;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+  height: auto;
+  border-radius: 2rem;
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  cursor: text;
+  /* Match the input under the label */
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #777;
+}
+
+/* id's*/
+#loading {
+  display: none;
+  background-image: url('siteImages/sudokuLoading.gif');
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  border-left: 8px solid #000000; 
+  cursor: wait;
+}
+#content {
+  border-right: 8px solid #000000;
+}
+
+
+/* navbar */
+body {
+  background: #fafafa;
+  color: #333333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: monospace;
+  font-weight: bold;
+  color: #808080;
+}
+
+.bg-steel {
+  background-color: #808080;
+  /*border-bottom: 8px solid #FFDC3E; */
+  border-bottom: 8px solid #FFD000;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #FFDC3E;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.site-header .navbar-brand {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+/* list styling for home page*/
+ol {
+  counter-reset: count;
+  list-style: none;
+  padding-left: 40px;
+  margin-bottom: 4rem;
+}
+ol li {
+  margin: 0 0 2rem 0;
+  padding-left: 20px;
+  counter-increment: count;
+  position: relative;
+  /*font-family: "Times New Roman", Times, serif;*/
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #808080; /*#000000;*/
+  vertical-align: middle;
+}
+ol li::before {
+  content: counter(count);
+  color: white; /*#FFDC3E; *//*#000000;*/
+  line-height: 2rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  --size: 32px;
+  left: calc(-1 * var(--size) - 10px);
+  background: #808080; /*#FFDC3E;*/
+  text-align: center;
+  border: 1px solid #808080;
+}
+
+
+
+/* Fallback for Edge
+-------------------------------------------------- */
+
+@supports (-ms-ime-align: auto) {
+  .form-label-group>label {
+    display: none;
+  }
+  .form-label-group input::-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .form-label-group>label {
+    display: none;
+  }
+  .form-label-group input:-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+/*sources:
+https://css-tricks.com/custom-list-number-styling/
+*/

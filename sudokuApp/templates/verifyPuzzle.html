@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST" action=""> 
+        {{ form.hidden_tag() }}
+        <!-- <div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div> -->
+        <div class="container">
+            
+            <h1 style="margin-top:4rem; font-size:2rem; text-align:left;">Verify Sudoku Entries</h1>
+
+            <div class="tableDiv">
+
+                <table id="grid">
+                <tr>
+                    <!-- print sudoku grid and assign cell # to each using loop.index0 command -->
+                    {% for value in form.cellVals %}
+                    {% if loop.index0 % 9 == 0 %}
+                </tr>
+                <tr>
+                    {% endif %}
+                    {% if grid[loop.index0] == 0 or not grid[loop.index0] %}
+                        <td> {{ value(id="cell-" + loop.index0|string) }} </td>
+                    {% else %}
+                        <td> {{ value(id="cell-" + loop.index0|string, value=grid[loop.index0]) }} </td>
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+
+                <!-- highlight cells with errors -->
+                {% for value in form.cellVals %}
+                    {% if value.errors %}
+                        <style>
+                            {{ "#cell-"+loop.index0|string }} {border: 4px solid #FF0000}
+                        </style>
+                    {% endif %}
+                {% endfor %}
+                
+                </table>
+
+                <!-- if form invalid, print error above submit button -->
+                {% if form.errors %}
+                    <div class="error">
+                        <span > Error: Invalid entry! Use only values 1-9 </span>
+                    </div>
+                {% endif %}
+              
+                <!-- display submit button -->
+                <div class="border-top pt-8">
+                    
+                    {{ form.submit(class="btn btn-primary btn-block submitBtn mb-2", onclick=" $('#loading').show();") }}
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
