@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
   <h2 class="mb-4">How to Use:</h2>
 
   <ol>
@@ -7,6 +8,15 @@
     <li>Verify that the program identified the numbers correctly. Make corrections where necessary</li>
     <li>Press "Solve" to recieve the solution!</li>
   </ol>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
   <form method="POST" action="" enctype="multipart/form-data">
     {{ form.hidden_tag() }}

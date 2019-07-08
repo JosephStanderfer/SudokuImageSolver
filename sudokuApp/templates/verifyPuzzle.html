@@ -1,21 +1,24 @@
 {% extends "layout.html" %}
+<!-- override method to show uploaded puzzle image -->
+{% block puzzle_picture %}
+    <div class="center-cropped">
+        <img src="{{ imagePath }}"  alt="puzzle" id="puzzleImage">
+    </div>
+{% endblock puzzle_picture %}
 {% block content %}
     <form method="POST" action=""> 
         {{ form.hidden_tag() }}
-        <!-- <div>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div> -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="container">
-            
-            <h1 style="margin-top:4rem; font-size:2rem; text-align:left;">Verify Sudoku Entries</h1>
+            <h1 style="font-size:2rem; text-align:left;">Verify Sudoku Entries</h1>
 
             <div class="tableDiv">
 

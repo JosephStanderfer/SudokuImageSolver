@@ -42,7 +42,7 @@
 			          <a class="nav-item nav-link" href="/about">About</a>
 		        </div>
 		      </div>
-		    </div>
+		    </div> 
 		</nav>
 	</header>
 
@@ -52,12 +52,16 @@
       <div id="content" class="d-none d-md-flex col-md-4 col-lg-5 bg-image">
         <div id="loading" class="col-md-3 col-lg-20 bg-image">
         </div>
+        {% block puzzle_picture %}
+          <!-- overridden in the verify puzzle page to show image -->
+        {% endblock puzzle_picture %}
+
       </div>
         <div class="col-md-8 col-lg-7">
           <div class="login d-flex align-items-center py-5">
             <div class="container">
               <div class="row">
-                <div class="col-md-9 col-lg-8 mx-auto">
+                <div class="col-md-9 col-lg-8 mx-auto" style="margin-right: auto; margin-left: auto;">
                    {% block content %}{% endblock %}
                 </div>
               </div>
