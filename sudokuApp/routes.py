@@ -122,7 +122,7 @@ def verify():
 
 @app.route("/solution", methods=['GET', 'POST'])
 def solution():
-	gridOut = np.array(session.pop('solution', None)).flatten()
+	gridOut = np.array(session.get('solution', 'not set')).flatten()
 	form = gridForm()
 	if form.validate_on_submit():
 		#gather results from form and convert None entries to 0

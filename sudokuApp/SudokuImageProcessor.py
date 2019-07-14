@@ -351,7 +351,8 @@ class sudokuImageProcessor():
             with self.session.as_default():
                 #load digit recognition model
                 #convnet = load_model('trainedModels\\DigitRecogitionConvnet.h5')
-                convnet = load_model('sudokuApp\\trainedModels\\printedDigitRecogConvnet.h5')
+                #convnet = load_model('sudokuApp\\trainedModels\\printedDigitRecogConvnet.h5')
+                convnet = load_model('sudokuApp\\trainedModels\\DigitRecogConvnetRev2.h5')
                 #convnet = load_model('trainedModels\\TenEpochDigitRecogitionConvnet.h5')
 
                 imagePredictions = convnet.predict(digitImages)

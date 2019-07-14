@@ -9,45 +9,21 @@
             <div class="tableDiv">
 
                 <table id="grid">
-                <tr>
-                    <!-- print sudoku grid and assign cell # to each using loop.index0 command -->
-                    {% for value in grid %}
-                        {% if loop.index0 % 9 == 0 %}
-                            </tr>
-                            <tr>
-                        {% endif %}
-                            {% if grid[loop.index0] == 0 or not grid[loop.index0] %}
-                                <td> <input id="cell-" + {{ loop.index0|string }} type="text" value="0" disabled> </td>
-                            {% else %}
-                                <td> <input id="cell-" + {{ loop.index0|string }} type="text" value="5" disabled> </td>
-
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-
-                <!-- highlight cells with errors -->
-                {% for value in form.cellVals %}
-                    {% if value.errors %}
-                        <style>
-                            {{ "#cell-"+loop.index0|string }} {border: 4px solid #FF0000}
-                        </style>
-                    {% endif %}
-                {% endfor %}
-                
+                    <tr>
+                        <!-- print sudoku grid and assign cell # to each using loop.index0 command -->
+                        {% for value in grid %}
+                            {% if loop.index0 % 9 == 0 %}
+                                </tr>
+                                <tr>
+                            {% endif %}
+                                {% if grid[loop.index0] == 0 or not grid[loop.index0] %}
+                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="" disabled> </td>
+                                {% else %}
+                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="{{ grid[loop.index0] }}" disabled> </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
                 </table>
-
-                <!-- if form invalid, print error above submit button -->
-                {% if form.errors %}
-                    <div class="error">
-                        <span > Error: Invalid entry! Use only values 1-9 </span>
-                    </div>
-                {% endif %}
-              
-                <!-- display submit button -->
-                <div class="border-top pt-8">
-                    
-                    {{ form.submit(class="btn btn-primary btn-block submitBtn mb-2", onclick=" $('#loading').show();") }}
-                </div>
             </div>
         </div>
     </form>
