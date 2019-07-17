@@ -1,4 +1,41 @@
 {% extends "layout.html" %}
 {% block content %}
-	<h2 class="mb-4">Created By: Joseph Standerfer</h2>
+	<h1 style="padding-top:2rem;color: black;">Created By: Joseph Standerfer</h1>
+	<p style="font-weight: bold;">Source code: <a href="https://github.com/JosephStanderfer/SudokuImageSolver">https://github.com/JosephStanderfer/SudokuImageSolver</a> </p>
+	<p></p>
+
+	<h2 style="padding-top:2rem; color: black;">General</h2>
+		<p style="padding-left: 2rem; font-weight: bold; color: #676767;">This application was built in Python using Flask and WTForms for the user interface. Its currently deployed on Google Cloud’s App Engine</p>
+
+	<h2 style="padding-top:2rem; color: black;">Image Processing</h2>
+		<p style="padding-left: 2rem; font-weight: bold; color: #676767; padding-bottom: 1rem;">There are dozens of methods required to process the images and extract the digit grids. An abbreviated summary is given below:</p>
+		<ol>
+			<li>Cleaned image using an edge detection kernel and OpenCV’s Kernel Adaptive Threshold</li>
+			<li>Located the puzzle grid by iterating through the image pixels and using OpenCV’s floodFill function. I judged the puzzle to be the “blob” the highest squared area in the picture</li>
+			<li>Straightened the puzzle within the image using OpenCV’s HoughLines on the grid</li>
+			<li>Stretched the grid to the edges using OpenCV’s getPerspectiveTransform function. The 4 corners parameters were found using OpenCV’s cornerHarris function while filtering for the outermost.</li>
+			<li>Removed the grid lines by setting the locations of the grid mask, found during the floodfill step, to the 10th percentile of the image color values</li>
+			<li>Divided the image into 81 cells (9X9) then used OpenCV’s flood fill again to find the digit within each cell</li>
+			<li>Created digit images by again iterating through pixels with OpenCV’s flood fill function and setting several thresholds (bounding size, length, width, coordinates, etc…) for separating digits from noise</li>
+			<li>Centered the digit images within the cell by finding its bounding box and rolling pixels across the cell until it was in the middle</li>
+			<li>Predicted the digit values using a CNN from Kera’s Tensorflow. The training was a combination of the MNIST dataset and 3000+ self-made examples. The MNIST data was useful, even though it was handwritten digits, because it provided a degree of translational learning and therefore better accuracy</li>
+		</ol>
+	<h2 style="padding-top:1rem; color: black;">Solving</h2>
+		<p style="padding-left: 2rem; font-weight: bold; color: #676767; padding-bottom: 1rem;"> The Sudoku puzzles are solved through the process of elimination. Each cell has a set of 9 possible values (ie. candidates). The program loops through each one of the cells and eliminates candidates using a variety of methods extrapolated from Sudoku's basic rules. Names and descriptions of these candidate elimination algorithms are shown below. The solution for each cell is found when there is only 1 remaining candidate. The program continues looping through the puzzle and applying the algorithms until all cells are filled.</p>
+		
+		<p style="padding-left: 1rem; font-weight: bold; color: black;">Hidden Single</p>  
+		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When a cell contains a candidate number than is not available for any other cell within its row, column or quadrant, then that number is the cell's solution</p>
+
+		<p style="padding-left: 1rem; font-weight: bold; color: black;">Naked Pair</p>
+		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When two cells in a row column or a block have the same pair of candidates, all other instances of those candidates within the same row block or column can be eliminated</p>
+
+		<p style="padding-left: 1rem; font-weight: bold; color: black;"> Pointing Pair</p>
+		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When a candate appears 2 or 3 times within a quadrant and only in a row or column, all other instances of the candidate within that row or column and outside the quadrant can be eliminated</p>
+
+		<p style="padding-left: 1rem; font-weight: bold; color: black;">Claiming Pair</p>
+		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDdd</p>
+
+	   	<p style="padding-left: 1rem; font-weight: bold; color: black;">Naked Triple</p>
+	   	<p style="padding-left: 4rem; font-weight: bold; color: #676767;">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDdd</p>
+
 {% endblock content %}

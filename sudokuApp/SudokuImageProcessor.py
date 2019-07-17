@@ -71,14 +71,6 @@ class sudokuImageProcessor():
         return (gridImage, gridMask)
         
     def resizeImage(self, image):
-        ## rewrite method
-        #
-        #
-        #
-        #
-        #
-        #
-        #
         height, width = image.shape[:2]
         max_height = 500
         max_width = 500
