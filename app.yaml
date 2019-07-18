@@ -12,24 +12,4 @@ handlers:
 # the entire handlers section) when there are no static files defined.
 - url: /.*
   script: auto
-# [END django_app]
-
-
-
-# other attempt
-# runtime: python37
-# api_version: 1
-# threadsafe: true
-
-
-# handlers:
-#   - url: /static  
-#   static_dir: static
-#   - url: /.*  
-#   script: main.app  
-
-
-# libraries:  
-#   - name: ssl   
-#   version: latest
 
