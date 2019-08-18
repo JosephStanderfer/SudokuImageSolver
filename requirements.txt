@@ -17,7 +17,7 @@ Keras-Preprocessing==1.0.9
 matplotlib==3.0.2
 numpy==1.16.4
 numpydoc==0.8.0
-opencv-python==4.0.0.21
+opencv-python==4.1.0.25
 openpyxl==2.5.12
 pandas==0.23.4
 pandocfilters==1.4.2
@@ -28,6 +28,7 @@ requests==2.21.0
 tensorboard==1.14.0
 tensorflow==1.14.0
 tensorflow-estimator==1.14.0
+gunicorn==19.3.0
 virtualenv==16.6.2
 webencodings==0.5.1
 Werkzeug==0.14.1
