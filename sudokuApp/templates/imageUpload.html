@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-  <h2 class="mb-4">How to Use:</h2>
+  <h2 class="mb-4">HOW TO USE:</h2>
 
   <ol>
     <li>Upload an image (PNG or JPG) containing the sudoku puzzle you would like to solve</li>
@@ -22,7 +22,7 @@
     {{ form.hidden_tag() }}
 
     <div class="form-group">
-      {{ form.picture(class="form-control-file") }}
+      {{ form.picture(class="form-control-file", style="background-color: transparent;") }}
       {% if form.picture.errors %}
           {% for error in form.picture.errors %}
               <div class="error">{{ error }}</div>
@@ -30,10 +30,9 @@
       {% endif %}
     </div>
 
-      <!-- {{ form.submit(class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2", onclick=" $('#loading').show();") }} -->
-      {{ form.submit(class="btn btn-primary btn-block submitBtn mb-2", onclick=" $('#loading').show();") }}
-      
-      <h6 style="color: black;"><i>** To use the default image (LEFT) press submit without selecting a file </i></h6>
+    {{ form.submit(class="btn btn-primary btn-block submitBtn mb-2", onclick=" $('#loading').show();") }}
+    
+    <h6 style="color: black;"><i>** To use the default image (LEFT) press submit without selecting a file </i></h6>
 
   </form>
 {% endblock content %}

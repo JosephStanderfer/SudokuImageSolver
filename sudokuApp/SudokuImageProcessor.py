@@ -8,6 +8,7 @@ Created on Wed Mar 13 15:46:27 2019
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import os
 from scipy import ndimage
 import math
 from keras.models import load_model
@@ -342,11 +343,8 @@ class sudokuImageProcessor():
         with self.graph.as_default():
             with self.session.as_default():
                 #load digit recognition model
-                #convnet = load_model('trainedModels\\DigitRecogitionConvnet.h5')
-                #convnet = load_model('sudokuApp\\trainedModels\\printedDigitRecogConvnet.h5')
-                convnet = load_model('sudokuApp\\trainedModels\\DigitRecogConvnetRev2.h5')
-                #convnet = load_model('trainedModels\\TenEpochDigitRecogitionConvnet.h5')
-
+                convnet = load_model('sudokuApp/trainedModels/DigitRecogConvnetRev2.h5')
+                #convnet = load_model('gs://sudoku-image-solver/DigitRecogConvnetRev2.h5')
                 imagePredictions = convnet.predict(digitImages)
                 
         #create sudoku grid to store predictedd digits

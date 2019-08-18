@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 	<h1 style="padding-top:2rem;color: black;">Created By: Joseph Standerfer</h1>
-	<p style="font-weight: bold; color: #676767;">Source code: <a href="https://github.com/JosephStanderfer/SudokuImageSolver">https://github.com/JosephStanderfer/SudokuImageSolver</a> </p>
+	<p style="font-weight: bold; color: #47515b;">Source code: <a href="https://github.com/JosephStanderfer/SudokuImageSolver">https://github.com/JosephStanderfer/SudokuImageSolver</a> </p>
 	<p></p>
 
 	<h2 style="padding-top:2rem; color: black;">General</h2>
-		<p style="padding-left: 2rem; font-weight: bold; color: #676767;">This application was built in Python using Flask and WTForms for the user interface. Its currently deployed on Google Cloud’s App Engine</p>
+		<p style="padding-left: 2rem; font-weight: normal; color: black;">This application was built in Python using Flask and WTForms for the user interface. Its currently deployed on Google Cloud’s App Engine</p>
 
 	<h2 style="padding-top:2rem; color: black;">Image Processing</h2>
-		<p style="padding-left: 2rem; font-weight: bold; color: #676767; padding-bottom: 1rem;">There are dozens of methods required to process the images and extract the digit grids. An abbreviated summary is given below:</p>
+		<p style="padding-left: 2rem; font-weight: normal; color: black; padding-bottom: 1rem;">There were dozens of methods required to process the images and extract the digit grids. An abbreviated summary is given below:</p>
 		<ol>
 			<li>Cleaned image using an edge detection kernel and OpenCV’s Kernel Adaptive Threshold</li>
 			<li>Located the puzzle grid by iterating through the image pixels and using OpenCV’s floodFill function. I judged the puzzle to be the “blob” the highest squared area in the picture</li>
@@ -21,24 +21,24 @@
 			<li>Predicted the digit values using a CNN from Kera’s Tensorflow. The training was a combination of the MNIST dataset and 3000+ self-made examples. The MNIST data was useful, even though it was handwritten digits, because it provided a degree of translational learning and therefore better accuracy</li>
 		</ol>
 	<h2 style="padding-top:1rem; color: black;">Solving</h2>
-		<p style="padding-left: 2rem; font-weight: bold; color: #676767; padding-bottom: 1rem;"> The Sudoku puzzles are solved through the process of elimination. Each cell has a set of 9 possible values (ie. candidates). The program loops through each one of the cells and eliminates candidates using a variety of methods extrapolated from Sudoku's basic rules. Names and descriptions of these candidate elimination algorithms are shown below. The solution for each cell is found when there is only 1 remaining candidate. The program continues looping through the puzzle and applying the algorithms until all cells are filled.</p>
+		<p style="padding-left: 2rem; font-weight: normal; color: black; padding-bottom: 1rem;"> The Sudoku puzzles are solved through the process of elimination. Each cell has a set of 9 possible values (ie. candidates). The program loops through each one of the cells and eliminates candidates using a variety of methods extrapolated from Sudoku's basic rules. Names and descriptions of these candidate elimination algorithms are shown below. The solution for each cell is found when there is only 1 remaining candidate. The program continues looping through the puzzle and applying the algorithms until all cells are filled.</p>
 
 		<p style="padding-left: 1rem; font-weight: bold; color: black;">Naked Single</p>  
-		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When a cell has only 1 remaining candidate, that digit is the cells solution</p>
+		<p style="padding-left: 4rem; font-weight: normal; color: black;">When a cell has only 1 remaining candidate, that digit is the cells solution</p>
 
 		<p style="padding-left: 1rem; font-weight: bold; color: black;">Hidden Single</p>  
-		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When a cell contains a candidate number than is not available for any other cell within its row, column, or block, then that number is the cell's solution</p>
+		<p style="padding-left: 4rem; font-weight: normal; color: black;">When a cell contains a candidate number than is not available for any other cell within its row, column, or block, then that number is the cell's solution</p>
 
 		<p style="padding-left: 1rem; font-weight: bold; color: black;">Naked Pair</p>
-		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When two cells in a row column or a block have the same pair of remaining candidates (Ex:[2,4] [2,4]), all other instances of those candidates within the same row, block, or column can be eliminated</p>
+		<p style="padding-left: 4rem; font-weight: normal; color: black;">When two cells in a row column or a block have the same pair of remaining candidates (Ex:[2,4] [2,4]), all other instances of those candidates within the same row, block, or column can be eliminated</p>
 
 		<p style="padding-left: 1rem; font-weight: bold; color: black;">Hidden Pair</p>
-		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When 2 cells with the same row, column, or block each have and are the only cells that have 2 specific candidates (Ex:[1,2,4] [1,2,5]), then all other candidates can be eliminated for those 3 cells </p>
+		<p style="padding-left: 4rem; font-weight: normal; color: black;">When 2 cells with the same row, column, or block each have and are the only cells that have 2 specific candidates (Ex:[1,2,4] [1,2,5]), then all other candidates can be eliminated for those 3 cells </p>
 
 		<p style="padding-left: 1rem; font-weight: bold; color: black;">Pointing Pair</p>
-		<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When a candate appears 2 or 3 times within a block and only in a single row or column, all other instances of the candidate within that row or column, and outside the quadrant, can be eliminated</p>
+		<p style="padding-left: 4rem; font-weight: normal; color: black;">When a candate appears 2 or 3 times within a block and only in a single row or column, all other instances of the candidate within that row or column, and outside the quadrant, can be eliminated</p>
 
 	   	<p style="padding-left: 1rem; font-weight: bold; color: black;">Naked Triple</p>
-	   	<p style="padding-left: 4rem; font-weight: bold; color: #676767;">When 3 cells in a row, column, or quadrant share the same set of 3 remaining candidates between them (Ex:[1,2] [2,3] [3,2]), then all other instances of those 3 candidates can be eliminated from the row, column, or block </p>
+	   	<p style="padding-left: 4rem; font-weight: normal; color: black;">When 3 cells in a row, column, or quadrant share the same set of 3 remaining candidates between them (Ex:[1,2] [2,3] [3,2]), then all other instances of those 3 candidates can be eliminated from the row, column, or block </p>
 
 {% endblock content %}
