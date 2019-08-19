@@ -1,5 +1,5 @@
 # SudokuImageSolver
-The Sudoku Image Solver is a Flask web app that uses image processing (blob, line, and corner detection), convolution neural nets, and candidate elimination algorithms to interpret and solve a sudoku puzzle passed to it as a picture.
+The Sudoku Image Solver is a Flask web app that uses image processing (blob, line, and corner detection), a convolution neural net, and candidate elimination algorithms to interpret and solve a sudoku puzzle passed to it as a picture.
 
 The app is currently deployed on google app engine. Link: http://sudoku-image-solver.appspot.com/
 
