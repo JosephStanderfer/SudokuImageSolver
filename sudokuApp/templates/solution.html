@@ -16,10 +16,15 @@
                                 </tr>
                                 <tr>
                             {% endif %}
-                                {% if grid[loop.index0] == 0 or not grid[loop.index0] %}
-                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="" disabled> </td>
+                            {% if grid[loop.index0] == 0 or not grid[loop.index0] %}
+                                <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="" disabled> </td>
+                            {% else %}
+                                <!-- highlight digits that were given by puzzle -->
+                                {% if originalGrid[loop.index0] == 0 or not originalGrid[loop.index0] %}
+                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="{{ grid[loop.index0] }}" style="font-weight: normal; color: #47515b;" disabled> </td>
                                 {% else %}
-                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="{{ grid[loop.index0] }}" disabled> </td>
+                                    <td> <input id={{ "cell-" + loop.index0|string }} type="text" value="{{ grid[loop.index0] }}" style="font-weight: bold; color: black;" disabled> </td>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </tr>

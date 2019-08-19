@@ -107,8 +107,8 @@
 /* id's*/
 #loading {
   display: none;
-  /*background-image: url('/siteImages/sudokuLoading.gif');*/
-  background-image: url('static/siteImages/sudokuLoading.gif');
+  background-image: url('http://storage.googleapis.com/sudoku-image-solver/sudokuLoading.gif');
+  /*background-image: url('static/siteImages/sudokuLoading.gif');*/
   position: absolute;
   top: 0;
   right: 0;

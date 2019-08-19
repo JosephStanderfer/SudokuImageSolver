@@ -68,8 +68,8 @@ def home():
 	if form.validate_on_submit():
 		if form.picture.data:
 			#save sudoku puzzle picture to local directory
-			picture_file = upload_image_file(form.picture.data)
-			session['picPath'] = picture_file
+			public_url = upload_image_file(form.picture.data)
+			session['picPath'] = public_url
 			#use image processor class to interpret
 			try:
 				#process image and save to session to be used by next page
@@ -83,21 +83,11 @@ def home():
 			return redirect(url_for('verify'))
 		else:	#if no picture was uploaded use default
 			#put picture file path as default
-			session['picPath'] = 'https://00e9e64bac6c126676489ad64780f2f00d3b311366a6d4f967-apidata.googleusercontent.com/download/storage/v1/b/sudoku-image-solver/o/default.jpg?qk=AD5uMEti3nplKSOhR2Nnxb2_tWh7aXSU5hT38XKZZ9tbOPrlX-sOzr2mlCVCTyRtqK8j1dWLgR0xj69ubJcnefTPFEguYhdMYr9Oe2fzjsD7DUsF9a2OMApaNrzPnJkAhp98mIhw8fm5irQniImmDx7ta297ndvCMKkuhAKqBq1EvJYQ4o8uo7Ex528EfWMpdON4jjjafhnRnilrQwUXY-BmV5VucgEBZwsjW4TFyULVINzPu4g2NIbHb0EYbxOy89QFcZjt_HdBYEll0HRcFkXFdXbo97AA4Z6yB3ZfV7LE4UyAdpCan6HP21rEDOzvGEiphkF3Q9onlAuP44z9ABzIoZA4MuErrNvdS6qnPxMxiQUQ78Ln5V4QO2_3pa7FlGxi_DVtCogh6TKr64F76ZmfFuvcCJo-IBMgShlpi62T-LnZRObCr8LM4D0KeaBKRNGn8Lf3D0Gi4ObQFyNa_NCWBZoYU0GE2Ao0jOPRKj_SZXTGV_6rEBDLNKe8iFkfNKVmDJ9f9X_8Cn00jWPZ3FxIWj42x0zRYSmTF8F5VkljIIexu2dpk6TCNRIawGXv6ctFtPqDCu3VKWSSUH4Gv_C9dxb75byknDz6O1vxvl8S0svQZYi7mZAtw5q_sii5511egjUtmYZ6JvILn5TkXoj2YPoK-H_omO6T9N0aVWY44_M8SjC9kMoRio8RGaVAtP2eXcu28m1NBhLDd4U0zZu5xtRFb2anb3tJUwvKTINfcOvhg1wULApAJ1n-Y5FPmZoq3GaDUs0pqo6P6HfbUfSqVf8AMtKeJw'
+			session['picPath'] = 'http://storage.googleapis.com/sudoku-image-solver/default.jpg'
 			try:
 				#no picture selected. use default
 				session['procGrid'] = process_picture('sudokuApp/static/siteImages/default.jpg').tolist()
 
-			# try 1
-			# read image from google cloud bucket
-			# image_path = 'gs://sudoku-image-solver/default.jpg'
-			# image = tf.read_file(image_path)
-			# image = tf.image.decode_jpeg(image)
-
-			# #try 2
-			# image = 'gs://sudoku-image-solver/default.jpg'
-			# session['procGrid'] = process_picture(image).tolist()
-			# https://stackoverflow.com/questions/44043036/how-to-read-image-file-from-s3-bucket-directly-into-memory
 			except:
 				#if error occurs in image processing. reload page
 				flash(Markup('Error! A Sudoku grid was not found in the image. Please try again or enter the digits manually <a href="/verify" class="alert-link">here</a>'), 'danger')
@@ -113,7 +103,7 @@ def verify():
 	#retrieve the grid inputs passed through the session cookie
 	gridOut = np.array(session.get('procGrid', 'not set'))
 	#get puzzle picture path for display
-	picPath =  session['picPath']
+	imagePath =  session['picPath']
 	#create flask form
 	form = gridForm()
 	if form.validate_on_submit():
@@ -132,18 +122,21 @@ def verify():
 			flash(Markup('Error! The program was not able to find a solution. Please recheck entries. If all entries were correct, click <a href="/solution" class="alert-link">here</a> to see partial solution.'), 'danger')
 			return redirect(url_for('verify'))
 
-	return render_template('verifyPuzzle.html', form=form, grid=gridOut.flatten(), imagePath=picPath)
+	return render_template('verifyPuzzle.html', form=form, grid=gridOut.flatten(), imagePath=imagePath)
 
 
 
 @app.route("/solution", methods=['GET', 'POST'])
 def solution():
 	gridOut = np.array(session.get('solution', 'not set')).flatten()
+	originalGrid = np.array(session.get('procGrid', 'not set')).flatten()
+	
+
 	form = gridForm()
 	if form.validate_on_submit():
 		#gather results from form and convert None entries to 0
 		gridOut = [field.data if field.data else 0 for field in form.cellVals.entries]
-	return render_template('solution.html', form=form, grid=gridOut)
+	return render_template('solution.html', form=form, grid=gridOut, originalGrid=originalGrid)
 
 
 @app.route("/about", methods=['GET', 'POST'])
