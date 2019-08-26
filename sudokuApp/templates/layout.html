@@ -11,13 +11,22 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='gridStyle1.css') }}">
   <!-- over-riding picture from bootstrap -->
   <style type="text/css">
-      .bg-image { 
+      .bg-image {
         background-image: url('static/siteImages/newspaper.jpg');
       }
+      #process {
+        background-image: url('static/siteImages/loading8.png');
+        background-size: 100% 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
       #loading {
-        background-image: url('http://storage.googleapis.com/sudoku-image-solver/sudokuLoading.gif');
+        background-image: url('http://storage.googleapis.com/sudoku-image-solver/sudokuLoading3.gif');
+        background-size: 100% 100%;
       }
   </style>
+  <link rel="prefetch" href="http://storage.googleapis.com/sudoku-image-solver/sudokuLoading3.gif">
 </head>
 <body>
 
@@ -47,10 +56,12 @@
 	</header>
 
   <div class="container-fluid">
-    <div class="row no-gutter">
+    <div class="row no-gutter" style="background-color: #cfd6c8;">
       
       <div id="content" class="d-none d-md-flex col-md-4 col-lg-5 bg-image">
-        <div id="loading" class="col-md-3 col-lg-20 bg-image">
+        <div id="process" class="col-md-2 col-lg-20 bg-image">
+        </div>
+        <div id="loading" class="col-md-2 col-lg-20 bg-image">
         </div>
         {% block puzzle_picture %}
           <!-- overridden in the verify puzzle page to show image -->

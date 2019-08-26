@@ -103,19 +103,28 @@
   font-size: 12px;
   color: #777;
 }
-
-/* id's*/
-#loading {
-  display: none;
-  background-image: url('http://storage.googleapis.com/sudoku-image-solver/sudokuLoading.gif');
-  /*background-image: url('static/siteImages/sudokuLoading.gif');*/
+#process {
+  background-image: url('static/siteImages/loading8.png');
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
   width: 100%;
+  border-left: 8px solid #000000;
+}
+/* id's*/
+#loading {
+  /*background-image: url('static/siteImages/sudokuLoading.gif');*/
+  background-image: url('http://storage.googleapis.com/sudoku-image-solver/sudokuLoading3.gif');
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-repeat: repeat-y;
   border-left: 8px solid #000000; 
   cursor: wait;
+  display: none;
 }
 #content {
   border-right: 8px solid #000000;
@@ -135,6 +144,7 @@ div.center-cropped {
   overflow:hidden;
   box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 black;
   border: 8px solid white;
+  z-index:1;
 }
 div.center-cropped img {
   height:100%;
