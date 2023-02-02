@@ -29,6 +29,6 @@ tensorflow==1.14.0
 tensorflow-estimator==1.14.0
 virtualenv==16.6.2
 webencodings==0.5.1
-Werkzeug==0.14.1
+Werkzeug==0.15.5
 widgetsnbextension==3.4.2
 WTForms==2.2.1
